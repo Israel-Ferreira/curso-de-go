@@ -6,22 +6,25 @@ import (
 
 
 func TestHello(t *testing.T) {
+
+	assertCorrectMessage :=  func(t *testing.T,got,want string){
+		t.Helper()
+
+		if got != want {
+			t.Errorf("got %s, want %s", got,want)
+		}
+	}
+
 	t.Run("Test with name", func(t *testing.T) {
 		got := Hello("Israel")
 		want :=  "Hello, Israel"
-
-		if got != want {
-			t.Errorf("got %s, want %s",got,want)
-		}
+		assertCorrectMessage(t,got,want)
 	})
 
 	t.Run("Test without name", func(t *testing.T){
 		got := Hello("")
 		want :=  "Hello, world!"
-
-		if got != want {
-			t.Errorf("got %s, want %s",got,want)
-		}
+		assertCorrectMessage(t,got,want)
 	})
 }
 
